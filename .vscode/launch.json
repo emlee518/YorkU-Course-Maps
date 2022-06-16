@@ -6,6 +6,28 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Course",
+            "request": "launch",
+            "mainClass": "Course",
+            "projectName": "project_2f28297d"
+        },
+        {
+            "type": "java",
+            "name": "Launch CourseMap",
+            "request": "launch",
+            "mainClass": "CourseMap",
+            "projectName": "project_2f28297d"
+        },
+        {
+            "type": "java",
+            "name": "Launch a",
+            "request": "launch",
+            "vmArgs": "--module-path C:/Users/Emily/Downloads/javafx/javafx-sdk-18.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "a",
+            "projectName": "project_2f28297d"
+        },
+        {
+            "type": "java",
             "name": "Launch Main",
             "request": "launch",
             "vmArgs": "--module-path C:/Users/Emily/Downloads/javafx/javafx-sdk-18.0.1/lib --add-modules javafx.controls,javafx.fxml",
