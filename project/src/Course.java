@@ -27,30 +27,38 @@ public class Course {
         this.credit = parts[3];
     }
 
-    public void get_prerequistes(WebDriver driver){
+    public void get_prerequistes(WebDriver driver, String space){
         String ss = "FW";
-        String ay = "2021";
+        String ay = "2022";
         String prereq_url = String.format("https://w2prod.sis.yorku.ca/Apps/WebObjects/cdm.woa/wa/crsq?fa=%s&sj=%s&cn=%s&cr=%s&ay=%s&ss=%s", this.faculty, this.subject, this.code, this.credit, ay, ss);
         driver.get(prereq_url);
 
+        get_prereqs(driver, space);
+    }
+
+    public void get_prereqs(WebDriver driver, String space){
         String body = driver.findElement(By.tagName("body")).getText();
 
         if(!body.contains("4U")){
-            Matcher matcher = Pattern.compile("Prerequisite[s]?: (.*?)[.]\s").matcher(body);
+            Matcher matcher = Pattern.compile("Prerequisite[s]?: (.*?)[.](?!\\d)").matcher(body);
             List<String> prereq_list = new ArrayList<String>();
-            
+
             while(matcher.find()){  
                 String prereqs = matcher.group(1);
-                String[] prereq_arr = prereqs.split("[;,]\s");
+                String[] prereq_arr = prereqs.split("; |, |and ");
                 prereq_list.addAll(Arrays.asList(prereq_arr));
+            }
 
+            if(!prereq_list.isEmpty()){
                 if(prereq_list.get(0).contains("GPA")){
                     prereq_list.remove(0);
                 }
-            }
-            if(!prereq_list.isEmpty()){
-                this.children = "     -> " + String.join("\n     -> ", prereq_list);
+                this.children = space + String.join("\n" + space, prereq_list);
             }
         }
+    }
+
+    public void add_children(String bullet, String child){
+        this.children += bullet + child;
     }
 }

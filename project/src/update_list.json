@@ -1,0 +1,25 @@
+{
+    "children":[
+        {
+            "name": "LE/EECS 1019 3.00",
+            "alt": "SC/MATH 1019 3.00"
+        },
+        {
+            "name": "SC/MATH 1300 3.00",
+            "alt": "SC/MATH 1013 3.00"
+        },
+        {
+            "name": "SC/MATH 1310 3.00",
+            "alt": "SC/MATH 1014 3.00",
+            "prereq": "SC/MATH 1013 3.00 or SC/MATH 1300 3.00 or GL/MATH 1901 or SC/ISCI 1401 3.00"
+        },
+        {
+            "name": "LE/EECS 2011 3.00",
+            "prereq": "SC/MATH 1090 3.00"
+        },
+        {
+            "name": "LE/EECS 2031 3.00",
+            "prereq": "LE/EECS 1021 3.00 or LE/EECS 1022 3.00 or LE/EECS 1030 3.00 or LE/EECS 1720 3.00"
+        }
+    ]
+}

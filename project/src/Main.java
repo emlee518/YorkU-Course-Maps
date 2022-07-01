@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.TreeMap;
 
 public class Main extends Application{
  
@@ -139,31 +140,33 @@ public class Main extends Application{
         
         CourseMap course_map = new CourseMap(faculty, program, year);
         Platform.runLater(() -> {
-            List<Object> full_list = course_map.get_full_list();
-            print_course_map(cmap, full_list);
+            TreeMap<String, Object> full_map = course_map.get_full_map();
+            print_course_map(cmap, full_map);
         });
     }
 
-    public void print_course_map(TextArea cmap, List<Object> full_list){
-        for(Object obj : full_list){
+    public void print_course_map(TextArea cmap, TreeMap<String, Object> full_map){       
+        full_map.forEach((course_name, obj) -> {
             if (obj.getClass().getName() == "Course"){
                 Course course = (Course) obj;
                 cmap.appendText(course.bullet + course.name + "\n");
+
                 if(!course.children.isEmpty()){
                     cmap.appendText(course.children + "\n");
                 }
             }
             else{
-                List<Course> tmp_list = (List<Course>) obj;
-                StringBuilder tmp_line = new StringBuilder();
-                for (Object tmp_obj: tmp_list){
-                    Course course = (Course) tmp_obj;
-                    tmp_line.append(course.name + "or ");
+                cmap.appendText("- " + course_name + "\n");
+                
+                if(!course_name.contains("EECS 1")){
+                    List<Course> tmp_list = (List<Course>) obj;
+                    for(Course course : tmp_list){
+                        cmap.appendText("     " + course.bullet + course.name + "\n");
+                        cmap.appendText(course.children + "\n");
+                    }  
                 }
-                tmp_line.setLength(tmp_line.length() - 3);
-                cmap.appendText("- " + tmp_line + "\n");
             }
-        }
+        });
     }
 
     public void back(Stage primaryStage, Scene previous){
