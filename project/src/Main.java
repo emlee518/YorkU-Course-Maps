@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -25,7 +26,7 @@ public class Main extends Application{
         VBox center_box = new VBox(title, start_button);
         center_box.setId("center_box");
 
-        Scene start_scene = new Scene(center_box, 700, 500);
+        Scene start_scene = new Scene(center_box, 800, 550);
         start_scene.getStylesheets().add("style.css");
         
         start_button.setOnAction(e -> create_map(primaryStage, start_scene));
@@ -92,7 +93,7 @@ public class Main extends Application{
         create_map_pane.setCenter(center_box);
         create_map_pane.setBottom(back_box);
 
-        Scene create_map_scene = new Scene(create_map_pane, 700, 500);
+        Scene create_map_scene = new Scene(create_map_pane, 800, 550);
         create_map_scene.getStylesheets().add("style.css");
 
         create_map_button.setOnAction(e -> {
@@ -107,14 +108,11 @@ public class Main extends Application{
 
     public void course_map(Stage primaryStage, Scene previous, String faculty, String program, String year){
         Label course_map_title = new Label(program + " Course Map");
-        course_map_title.setId("labels");
-
-        Button save = new Button("Save");
-        save.setId("save");
+        course_map_title.setId("program_title");
 
         TextArea cmap = new TextArea();
         cmap.setEditable(false);
-        cmap.setId("console");
+        cmap.setId("cmap");
 
         Label course_types = new Label("- Required          = Alternative          -> Prerequisites          + Upper year");
         course_types.setId("course_types");    
@@ -122,6 +120,15 @@ public class Main extends Application{
         Hyperlink back = new Hyperlink("Back");
         back.setOnAction(e -> back(primaryStage, previous));
         back.setId("hyperlink");
+
+        Button save = new Button("Save");
+        save.setOnAction(e -> {
+            if(!cmap.getText().isEmpty()){
+                save(primaryStage, cmap.getText(), program);
+            }
+        });
+        save.setId("save");
+
 
         HBox top_box = new HBox(course_map_title, save);
         top_box.setId("top_box");
@@ -134,7 +141,7 @@ public class Main extends Application{
         course_map_pane.setCenter(cmap);
         course_map_pane.setBottom(bottom_box);
 
-        Scene course_map_scene = new Scene(course_map_pane, 700, 500);
+        Scene course_map_scene = new Scene(course_map_pane, 800, 550);
         course_map_scene.getStylesheets().add("style.css");
         primaryStage.setScene(course_map_scene);
         
@@ -167,6 +174,20 @@ public class Main extends Application{
                 }
             }
         });
+        cmap.setScrollTop(Double.MAX_VALUE);
+    }
+
+    public void save(Stage primaryStage, String cmap_text, String program){
+        try {
+            PrintWriter writer = new PrintWriter(program.replaceAll(" ", "-") + "-Course-Map.txt", "UTF-8");
+            writer.println(program + " Course Map");
+            writer.println("- Required \n= Alternative \n-> Prerequisites \n+ Upper year\n");
+            writer.println(cmap_text);
+            writer.close();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void back(Stage primaryStage, Scene previous){

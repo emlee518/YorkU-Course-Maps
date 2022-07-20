@@ -23,7 +23,7 @@
 
 #info_grid{
     -fx-alignment: center; 
-    -fx-padding: 0 0 100 0;
+    -fx-padding: 0 0 80 0;
 }
 
 #back_box{
@@ -43,6 +43,12 @@
     -fx-pref-height: 17;
 }
 
+#program_title{
+    -fx-font-size: 17;
+    -fx-padding: 5 0 0 0;
+    -fx-pref-width: 300;
+}
+
 #save{
     -fx-focus-color: transparent; 
     -fx-faint-focus-color: transparent;
@@ -51,15 +57,15 @@
     -fx-pref-height: 15;
 }
 
-#console{
+#cmap{
     -fx-border-color: black;
-    -fx-max-width: 650;
-    -fx-max-height: 450;
+    -fx-max-width: 750;
+    -fx-max-height: 500;
     -fx-focus-color: transparent; 
     -fx-faint-focus-color: transparent;
 }
 
-#console .scroll-pane{
+#cmap .scroll-pane{
     -fx-vbar-policy: always; 
     -fx-hbar-policy: never; 
 }
@@ -72,11 +78,11 @@
 
 #bottom_box{
     -fx-padding: 5 5 5 5;
-    -fx-spacing: 105;
+    -fx-spacing: 150;
 }
 
 #top_box{
     -fx-padding: 5 5 5 25;
-    -fx-spacing: 360;
+    -fx-spacing: 392;
 }
 

@@ -2,7 +2,7 @@
     "children":[
         {
             "name": "LE/EECS 1019 3.00",
-            "alt": "SC/MATH 1019 3.00"
+            "alt": "SC/MATH 1019 3.00" 
         },
         {
             "name": "SC/MATH 1300 3.00",
@@ -20,6 +20,77 @@
         {
             "name": "LE/EECS 2031 3.00",
             "prereq": "LE/EECS 1021 3.00 or LE/EECS 1022 3.00 or LE/EECS 1030 3.00 or LE/EECS 1720 3.00"
+        },
+        {
+            "name": "SC/MATH 2030 3.00",
+            "replace": "SC/MATH 1014 3.00 or SC/MATH 1310 3.00 or SC/ISCI 1402 3.00 or SC/ISCI 1410 6.00"
+        },
+        {
+            "name": "LE/EECS 3401 3.00 or LE/EECS 3421 3.00 or LE/EECS 3461 3.00",
+            "courses": [
+                {   
+                    "course_name": "LE/EECS 3401 3.00",
+                    "prereq": "SC/MATH 1090 3.00",
+                    "index": 0
+                },
+                {
+                    "course_name": "LE/EECS 3421 3.00",
+                    "replace": "LE/EECS 2030 3.00 or LE/EECS 1030 3.00",
+                    "index": 1
+                }
+            ]
+        },
+        {
+            "name": "LE/EECS 4161 3.00",
+            "replace": "LE/EECS 3101 3.00"
+        },
+        {
+            "name": "LE/EECS 4214 3.00",
+            "replace": "LE/EECS 3213 3.00; SC/MATH 2030 3.00 or SC/MATH 2930 3.00; LE/EECS 3451 4.00 or LE/EECS 3602 4.00 or LE/ESSE 4020 3.00 or SC/MATH 4830 3.00 or SC/PHYS 4060 3.00 or SC/PHYS 4250 3.00"
+        },
+        {
+            "name": "LE/EECS 4404 3.00",
+            "replace": "LE/EECS 2030 3.00 or LE/EECS 1030 3.00; SC/MATH 2030 3.00 or SC/MATH 2930 3.00 or SC/MATH 1131 3.00"
+        },
+        {
+            "name": "LE/EECS 4412 3.00",
+            "replace": "LE/EECS 2030 3.00 or LE/EECS 1030 3.00;  LE/EECS 3101 3.00; LE/EECS 3421 3.00; SC/MATH 2030 3.00 or SC/MATH 2930 3.00 or SC/MATH 1131 3.00"
+        },
+        {
+            "name": "LE/EECS 4415 3.00",
+            "prereq": "LE/EECS 3421 3.00; LE/EECS 3101 3.00"
+        },
+        {
+            "name": "LE/EECS 4422 3.00",
+            "replace": "SC/MATH 1025 3.00; SC/MATH 1310 3.00; LE/EECS 2031 3.00 or LE/EECS 2032 4.00"
+        },
+        {
+            "name": "LE/EECS 4452 3.00",
+            "prereq": "LE/EECS 3451 4.00 or LE/EECS 3602 4.00"
+        },
+        {
+            "name": "LE/EECS 4462 3.00",
+            "prereq": "LE/EECS 2031 3.00"
+        },
+        {
+            "name": "LE/EECS 4471 3.00",
+            "prereq": "SC/MATH 1025 3.00; SC/MATH 1310 3.00; LE/EECS 3431 3.00"
+        },
+        {
+            "name": "LE/EECS 4611 4.00",
+            "prereq": "LE/EECS 3611 4.00"
+        },
+        {
+            "name": "LE/EECS 4622 4.00",
+            "prereq": "SC/PHYS 2020 3.00"
+        },
+        {
+            "name": "LE/EECS 4627 3.00",
+            "prereq": "LE/EECS 3622 4.00 or LE/EECS 4622 4.00"
+        },
+        {
+            "name": "LE/EECS 4640 3.00",
+            "prereq": "LE/EECS 2602 4.00 or LE/EECS 3451 4.00"
         }
     ]
 }

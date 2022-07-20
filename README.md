@@ -4,10 +4,12 @@ A visualization tool that scrapes data from the official [Academic Calendar](htt
 
 ## Resources
 
-- Latest version of Java (18.0.1.1)
+- Java JDK (18.0.1.1)
 - JavaFX (18.0.1)
 - Selenium with Java (4.2.1)
 - ChromeDriver (102.0.5005.61)
+- Chrome Browser (102.0.5005.63)
+- Visual Studio Code (1.69.1)
 
 ## Running
 

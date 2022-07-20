@@ -38,21 +38,15 @@ public class Course {
 
     public void get_prereqs(WebDriver driver, String space){
         String body = driver.findElement(By.tagName("body")).getText();
+        Matcher prereq_matcher = Pattern.compile("Prerequisite[s]?: (.*?)[.](?!\\d)").matcher(body);
 
-        if(!body.contains("4U")){
-            Matcher matcher = Pattern.compile("Prerequisite[s]?: (.*?)[.](?!\\d)").matcher(body);
-            List<String> prereq_list = new ArrayList<String>();
+        if(!body.contains("4U") && prereq_matcher.find()){ 
+            String prereqs = prereq_matcher.group(1);
+            String[] prereq_arr = prereqs.split("; |, |and ");
+            List<String> prereq_list = new ArrayList<String>(Arrays.asList(prereq_arr));
 
-            while(matcher.find()){  
-                String prereqs = matcher.group(1);
-                String[] prereq_arr = prereqs.split("; |, |and ");
-                prereq_list.addAll(Arrays.asList(prereq_arr));
-            }
-
+            prereq_list.removeIf(pl -> !pl.matches("^.*([A-Z]{2}\\/[A-Z]{4} \\d{4} \\d.00).*$"));
             if(!prereq_list.isEmpty()){
-                if(prereq_list.get(0).contains("GPA")){
-                    prereq_list.remove(0);
-                }
                 this.children = space + String.join("\n" + space, prereq_list);
             }
         }
@@ -60,5 +54,9 @@ public class Course {
 
     public void add_children(String bullet, String child){
         this.children += bullet + child;
+    }
+
+    public void replace_prereq(String bullet, String child){
+        this.children = bullet + child;
     }
 }
