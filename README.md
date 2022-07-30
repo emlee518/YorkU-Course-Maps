@@ -23,7 +23,7 @@ A visualization tool that scrapes data from the official [York Academic Calendar
 6. Import downloaded files
 7. Add JavaFX runtime components:
     
-        `"vmArgs": "--module-path <path-to-JavaFX-SDK-lib> --add-modules javafx.controls,javafx.fxml"`
+        "vmArgs": "--module-path <path-to-JavaFX-SDK-lib> --add-modules javafx.controls,javafx.fxml"
 
 8. Downgrade Chrome Browser if needed
 
