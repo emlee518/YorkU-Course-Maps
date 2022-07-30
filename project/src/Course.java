@@ -26,7 +26,7 @@ public class Course {
         this.code = parts[2];
         this.credit = parts[3];
     }
-
+    
     public void get_prerequistes(WebDriver driver, String space){
         String ss = "FW";
         String ay = "2022";
@@ -45,7 +45,7 @@ public class Course {
             String[] prereq_arr = prereqs.split("; |, |and ");
             List<String> prereq_list = new ArrayList<String>(Arrays.asList(prereq_arr));
 
-            prereq_list.removeIf(pl -> !pl.matches("^.*([A-Z]{2}\\/[A-Z]{4} \\d{4} \\d.00).*$"));
+            prereq_list.removeIf(pl -> !pl.matches("^.*([A-Z]{2}\\/[A-Z]{3,4} \\d{4} \\d.00).*$"));
             if(!prereq_list.isEmpty()){
                 this.children = space + String.join("\n" + space, prereq_list);
             }

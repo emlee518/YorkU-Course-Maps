@@ -62,7 +62,7 @@ public class Main extends Application{
         });
 
         ComboBox<String> school_year = new ComboBox<>();
-        school_year.getItems().addAll("2019-2020", "2020-2021", "2021-2022");
+        school_year.getItems().addAll("2019-2020", "2020-2021", "2021-2022", "2022-2023");
         school_year.setId("combobox");
 
         Button create_map_button = new Button("Create Map");
@@ -114,7 +114,7 @@ public class Main extends Application{
         cmap.setEditable(false);
         cmap.setId("cmap");
 
-        Label course_types = new Label("- Required          = Alternative          -> Prerequisites          + Upper year");
+        Label course_types = new Label("- Required          = Alternative          -> Prerequisite          + Upper year");
         course_types.setId("course_types");    
 
         Hyperlink back = new Hyperlink("Back");
@@ -124,7 +124,7 @@ public class Main extends Application{
         Button save = new Button("Save");
         save.setOnAction(e -> {
             if(!cmap.getText().isEmpty()){
-                save(primaryStage, cmap.getText(), program);
+                save(primaryStage, cmap.getText(), program, year);
             }
         });
         save.setId("save");
@@ -152,20 +152,28 @@ public class Main extends Application{
         });
     }
 
-    public void print_course_map(TextArea cmap, TreeMap<String, Object> full_map){       
+    public void print_course_map(TextArea cmap, TreeMap<String, Object> full_map){ 
+        StringBuilder upper_courses = new StringBuilder();
+
         full_map.forEach((course_name, obj) -> {
             if (obj.getClass().getName() == "Course"){
                 Course course = (Course) obj;
-                cmap.appendText(course.bullet + course.name + "\n");
+                String tmp_name = course.bullet + course.name + "\n";
 
                 if(!course.children.isEmpty()){
-                    cmap.appendText(course.children + "\n");
+                    tmp_name += course.children + "\n";
+                }
+                if(course.bullet == "+ "){
+                    upper_courses.append(tmp_name);
+                }
+                else{
+                    cmap.appendText(tmp_name);
                 }
             }
             else{
                 cmap.appendText("- " + course_name + "\n");
                 
-                if(!course_name.contains("EECS 1")){
+                if(course_name.contains("EECS 3")){
                     List<Course> tmp_list = (List<Course>) obj;
                     for(Course course : tmp_list){
                         cmap.appendText("     " + course.bullet + course.name + "\n");
@@ -174,13 +182,14 @@ public class Main extends Application{
                 }
             }
         });
+        cmap.appendText(upper_courses.toString());
         cmap.setScrollTop(Double.MAX_VALUE);
     }
 
-    public void save(Stage primaryStage, String cmap_text, String program){
+    public void save(Stage primaryStage, String cmap_text, String program, String year){
         try {
-            PrintWriter writer = new PrintWriter(program.replaceAll(" ", "-") + "-Course-Map.txt", "UTF-8");
-            writer.println(program + " Course Map");
+            PrintWriter writer = new PrintWriter(String.format("course_maps/%s-%s-Course-Map.txt", program.replaceAll(" ", "-"), year));
+            writer.println(String.format("%s %s Course Map", program, year));
             writer.println("- Required \n= Alternative \n-> Prerequisites \n+ Upper year\n");
             writer.println(cmap_text);
             writer.close();
